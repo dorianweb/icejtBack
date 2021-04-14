@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @OA\Property(property="updated_at", type="string", format="date-time", description="Last update timestamp", readOnly="true"),
  * @OA\Property(property="deleted_at", type="string", format="date-time", description="Soft delete timestamp", readOnly="true"),
  * )
- * Class User
+ * Class Flavor
  */
 class Flavor extends Model
 {
