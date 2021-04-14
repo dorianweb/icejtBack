@@ -25,7 +25,6 @@ class ClassicCreamController extends Controller
      */
     public function index()
     {
-
         $creams = ClassicCream::with('flavor')->paginate();
         return response($creams, 200);
     }

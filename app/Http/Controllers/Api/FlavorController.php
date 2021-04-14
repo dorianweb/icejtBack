@@ -38,19 +38,23 @@ class FlavorController extends Controller
     {
         $code = 404;
         $response = ['created' => false];
-        if ($request->user()->hasRole(User::ROLE_ADMIN)) {
-            $data = $request->validate([
-                'name' => 'distinct|string|unique:flavors,name',
-                'price' => 'distinct|integer',
-                'color' => 'distinct|string|unique:flavors,color',
-            ]);
-            $flavor = Flavor::firstOrCreate([
-                'name' => $data['name'] . '1',
-                'price' => $data['price'],
-                'color' => $data['color'] . '1',
-            ]);
-            $response['created'] = true;
-            $response['data'] = new FlavorRessource($flavor);
+        try {
+            if ($request->user()->hasRole(User::ROLE_ADMIN)) {
+                $data = $request->validate([
+                    'name' => 'distinct|string|unique:flavors,name',
+                    'price' => 'distinct|integer',
+                    'color' => 'distinct|string|unique:flavors,color',
+                ]);
+                $flavor = Flavor::firstOrCreate([
+                    'name' => $data['name'] . '1',
+                    'price' => $data['price'],
+                    'color' => $data['color'] . '1',
+                ]);
+                $response['created'] = true;
+                $response['data'] = new FlavorRessource($flavor);
+            }
+        } catch (ValidationException $e) {
+            $response['message'] = $e;
         }
         return response($response, $code);
     }
