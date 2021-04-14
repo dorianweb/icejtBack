@@ -46,15 +46,15 @@ class FlavorController extends Controller
                     'color' => 'distinct|string|unique:flavors,color',
                 ]);
                 $flavor = Flavor::firstOrCreate([
-                    'name' => $data['name'] . '1',
+                    'name' => $data['name'],
                     'price' => $data['price'],
-                    'color' => $data['color'] . '1',
+                    'color' => $data['color'],
                 ]);
                 $response['created'] = true;
                 $response['data'] = new FlavorRessource($flavor);
             }
         } catch (ValidationException $e) {
-            $response['message'] = $e;
+            return $e;
         }
         return response($response, $code);
     }
