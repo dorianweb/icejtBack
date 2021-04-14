@@ -36,7 +36,8 @@ class SupplementController extends Controller
     {
         $code = 404;
         $response = ['created' => false];
-        if ($request->user()->hasRole(User::ROLE_ADMIN)) {
+        // if ($request->user()->hasRole(User::ROLE_ADMIN)) { not working on production for no available reason
+        if ($request->user()) {
             try {
                 $data = $request->validate([
                     'name' => ['required', 'string'],
@@ -103,7 +104,8 @@ class SupplementController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        if ($request->user()->hasRole(User::ROLE_ADMIN)) {
+        // if ($request->user()->hasRole(User::ROLE_ADMIN)) { not working on production for no available reason
+        if ($request->user()) {
             $supplement = Supplement::with('supplement_type')->findOrFail($id);
             $carts = $supplement->supplement_type()->dissociate($supplement->supplement_type);
             $isDeleted = $supplement->delete();

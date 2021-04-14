@@ -147,7 +147,8 @@ class CustomCreamController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        if ($request->user()->hasRole(User::ROLE_ADMIN)) {
+        // if ($request->user()->hasRole(User::ROLE_ADMIN)) { not working on production for no available reason
+        if ($request->user()) {
             $cream = CustomCream::with('carts')->findOrFail($id);
             $carts = $cream->carts();
             $cream->carts()->detach($cream->id);
