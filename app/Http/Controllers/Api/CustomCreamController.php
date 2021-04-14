@@ -51,6 +51,7 @@ class CustomCreamController extends Controller
                 'supplements' => ['required', 'array']
             ]);
             $response['validation'] = true;
+            dd($data);
             $cream =  CustomCream::firstOrCreate([
                 'name' => $data['name']
             ]);
