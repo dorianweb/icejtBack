@@ -138,8 +138,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        Flavor::factory()
+        /*  Flavor::factory()
             ->count(500)
             ->create();
+        */
     }
 }

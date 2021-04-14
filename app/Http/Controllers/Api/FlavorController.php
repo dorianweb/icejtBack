@@ -24,7 +24,7 @@ class FlavorController extends Controller
      */
     public function index()
     {
-        $flavors = new FlavorCollection(Flavor::paginate());
+        $flavors =  FlavorRessource::collection(Flavor::all());
         return response($flavors, 200);
     }
 
@@ -61,7 +61,6 @@ class FlavorController extends Controller
         }
         return response($response, $code);
     }
-
     /**
      * Display the specified resource.
      *
