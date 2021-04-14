@@ -39,7 +39,9 @@ class FlavorController extends Controller
         $code = 404;
         $response = ['created' => false];
         try {
-            if ($request->user()->hasRole(User::ROLE_ADMIN)) {
+            // if ($request->user()->hasRole(User::ROLE_ADMIN)) { marche pas en prod
+            dd($request->user());
+            if ($request->user()) {
                 $data = $request->validate([
                     'name' => 'distinct|string|unique:flavors,name',
                     'price' => 'distinct|integer',
