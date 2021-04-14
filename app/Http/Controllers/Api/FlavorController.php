@@ -52,6 +52,8 @@ class FlavorController extends Controller
                 ]);
                 $response['created'] = true;
                 $response['data'] = new FlavorRessource($flavor);
+            } else {
+                dd('not logged in as admin');
             }
         } catch (ValidationException $e) {
             return $e;
