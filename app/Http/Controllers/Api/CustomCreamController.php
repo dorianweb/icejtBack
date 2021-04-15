@@ -42,7 +42,6 @@ class CustomCreamController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
         try {
             $response = ['created' => false];
             $code = 404;
