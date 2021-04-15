@@ -47,7 +47,6 @@ class SupplementController extends Controller
                 ]);
 
                 $supplementType = SupplementType::where(['name' => $data['supplement_type']])->first();
-                dd($supplementType);
                 if ($supplementType) {
                     $supplement = Supplement::firstOrNew([
                         'name' => $data['name'],
@@ -56,6 +55,7 @@ class SupplementController extends Controller
                         $supplementType->name === Supplement::TYPE_NAPPAGE ? Supplement::UNIT_LIQUID : $data['unit'],
                     ]);
                     $supplement->supplement_type()->associate($supplementType);
+                    dd($supplement);
                     $supplement->save();
                     $response['created'] = true;
                     $response['data'] = $supplement;
