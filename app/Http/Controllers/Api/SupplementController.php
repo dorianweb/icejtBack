@@ -37,8 +37,8 @@ class SupplementController extends Controller
         $code = 404;
         $response = ['created' => false];
         // if ($request->user()->hasRole(User::ROLE_ADMIN)) { not working on production for no available reason
-        if ($request->user()) {
-            try {
+        try {
+            if ($request->user()) {
                 $data = $request->validate([
                     'name' => ['required', 'string'],
                     'weight' => ['required', 'int'],
@@ -55,16 +55,15 @@ class SupplementController extends Controller
                         $supplementType->name === Supplement::TYPE_NAPPAGE ? Supplement::UNIT_LIQUID : $data['unit'],
                     ]);
                     $supplement->supplement_type()->associate($supplementType);
-                    dd($supplement);
                     $supplement->save();
                     $response['created'] = true;
                     $response['data'] = $supplement;
                 }
-            } catch (ValidationException $error) {
-                $response['message'] = $error;
-                return response($response, $code);
             }
+        } catch (ValidationException $error) {
+            $response['message'] = $error;
         }
+
         return response($response, $code);
     }
 
