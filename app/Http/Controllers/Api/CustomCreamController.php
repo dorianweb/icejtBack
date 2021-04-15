@@ -96,7 +96,7 @@ class CustomCreamController extends Controller
      */
     public function show($id)
     {
-        return CustomCream::findOrFail($id)->load('carts');
+        return CustomCream::findOrFail($id)->load('carts.user', 'flavors', 'supplements.supplement_type');
     }
 
     /**
