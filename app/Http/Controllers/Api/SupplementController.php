@@ -45,10 +45,9 @@ class SupplementController extends Controller
                     'unit' => ['required', 'string'],
                     'supplement_type' => ['required', 'string'],
                 ]);
-                $supplementType = SupplementType::find($data['supplement_type']);
-                if (!$supplementType) {
-                    $supplementType = SupplementType::where(['name' => $data['supplement_type']])->first();
-                }
+
+                $supplementType = SupplementType::where(['name' => $data['supplement_type']])->first();
+                dd($supplementType);
                 if ($supplementType) {
                     $supplement = Supplement::firstOrNew([
                         'name' => $data['name'],
